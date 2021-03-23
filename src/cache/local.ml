@@ -233,7 +233,7 @@ let promote_sync cache paths key metadata ~repository ~duplication =
        correctly handle the situation when the file is modified or deleted
        during the promotion process. *)
     let tmp =
-      let dst = Path.relative cache.temp_dir "data" in
+      let dst = Path.relative cache.temp_dir ("data" ^ string_of_int (Random.int 65536)) in
       if Path.exists dst then Path.unlink dst;
       duplicate ~duplication cache ~src:abs_path ~dst;
       dst
